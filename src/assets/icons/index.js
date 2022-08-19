@@ -1,1 +1,1 @@
-
+export {default as IC_Back} from './ic_back.svg';
