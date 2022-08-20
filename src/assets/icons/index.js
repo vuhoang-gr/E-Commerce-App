@@ -5,6 +5,11 @@ export {default as IC_Arrow} from './ic_arrow.svg';
 export {default as IC_Pen} from './ic_pen.svg';
 export {default as IC_Google} from './ic_google.svg';
 export {default as IC_Facebook} from './ic_facebook.svg';
-
-
-
+export {default as IC_Filters} from './ic_filters.svg';
+export {default as IC_Sort_By} from './ic_sort_by.svg';
+export {default as IC_View1} from './ic_view1.svg';
+export {default as IC_View2} from './ic_view2.svg';
+export {default as IC_Find} from './ic_find.svg';
+export {default as IC_Star} from './ic_star.svg';
+export {default as IC_Yellow_Star} from './ic_yellow_star.svg';
+export {default as IC_Heart} from './ic_heart.svg';
