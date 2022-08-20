@@ -1,7 +1,7 @@
 import {Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-const [designWidth, designHeight] = [375, 780];
+const [designWidth, designHeight] = [375, 734];
 
 const scale = {
   scaleWidth(number) {

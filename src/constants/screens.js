@@ -1,0 +1,6 @@
+const SCREENS = {
+    AUTH: 'AUTH_SCREEN',
+    FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+};
+
+export default SCREENS;

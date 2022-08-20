@@ -8,7 +8,7 @@ const COLORS = {
   eucalyptus: '#2AA952',
 }
 
-export const CUSTOM_COLORS = {
+export const CUSTOM_COLOR = {
   black: COLORS.mineShaft,
   gray: COLORS.dustyGray,
   primary: COLORS.punch,

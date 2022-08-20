@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import AuthNavigator from './AuthNavigator'
 
 const RootNavigator = () => {
   return (
-    <View>
-      <Text>RootNavigator</Text>
-    </View>
+    <NavigationContainer>
+      <AuthNavigator/>
+    </NavigationContainer>
   )
 }
 
 export default RootNavigator
-
-const styles = StyleSheet.create({})
