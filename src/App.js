@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet} from 'react-native'
 import React from 'react'
 import Display from './temp/Display'
+import AuthProvider from './routes/AuthProvider'
 
 const App = () => {
   return (
-    <Display/>
+    <AuthProvider>
+      <Display />
+    </AuthProvider>
   )
 }
 

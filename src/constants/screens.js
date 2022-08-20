@@ -1,6 +1,7 @@
 const SCREENS = {
     AUTH: 'AUTH_SCREEN',
     FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+    HOME: 'HOME_SCREEN',
 };
 
 export default SCREENS;

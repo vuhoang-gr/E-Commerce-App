@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import AuthNavigator from './AuthNavigator'
+import TabNavigator from './TabNavigator'
 
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <AuthNavigator/>
+      {false? <TabNavigator/> :<AuthNavigator/>}
     </NavigationContainer>
   )
 }

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import BackHeader from '../../components/BackHeader'
 import { IC_Arrow, IC_Back } from '../../assets/icons'
 import { CUSTOM_COLOR } from '../../constants/colors'
@@ -21,8 +21,10 @@ import isValidEmail from './apis/isValidEmail'
 import isValidName from './apis/isValidName'
 import isValidPassword from './apis/isValidPassword'
 import useKeyboard from '../../hooks/useKeyboard'
+import { AuthContext } from '../../routes/AuthProvider'
 
 const SignupScreen = (props) => {
+  const {register} = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -70,14 +72,15 @@ const SignupScreen = (props) => {
           <Text style={[textStyles.desItem, styles.signInText]}>
             Already have an account?
           </Text>
-          <IC_Arrow />
+          <IC_Arrow/>
         </TouchableOpacity>
 
         {/* sign up */}
         <LongButton
           content='SIGN UP'
           isActive={activeHanle()}
-          style={styles.signUpButton} />
+          style={styles.signUpButton} 
+          onPress={() => register(email, password)}/>
       </ScrollView>
   )
 }
