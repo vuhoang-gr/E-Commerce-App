@@ -17,11 +17,12 @@ import scale from '../../constants/responsive'
 import BigTextForm from '../../components/TextForm/BigTextForm'
 import LongButton from '../../components/Button/LongButton'
 import SocialButton from '../../components/Button/SocialButton'
-import isValidEmail from './apis/isValidEmail'
-import isValidName from './apis/isValidName'
-import isValidPassword from './apis/isValidPassword'
+import isValidEmail from './functions/isValidEmail'
+import isValidName from './functions/isValidName'
+import isValidPassword from './functions/isValidPassword'
 import useKeyboard from '../../hooks/useKeyboard'
 import SCREENS from '../../constants/screens'
+import userApi from '../../apis/userApi'
 
 const LoginScreen = (props) => {
     const {navigation} = props;
@@ -34,6 +35,10 @@ const LoginScreen = (props) => {
         }
         return false;
     };
+
+    const loginHandle = () => {
+        userApi.emailLogin(email, password);
+    }
 
     const onForgot = () => {
         navigation.navigate(SCREENS.FORGOT_PASSWORD);
@@ -75,7 +80,8 @@ const LoginScreen = (props) => {
             <LongButton
                 content='LOGIN'
                 isActive={activeHanle()}
-                style={styles.signUpButton} />
+                style={styles.signUpButton} 
+                onPress={loginHandle}/>
         </ScrollView>
     )
 }

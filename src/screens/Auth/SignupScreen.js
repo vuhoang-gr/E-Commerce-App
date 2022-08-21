@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import BackHeader from '../../components/BackHeader'
 import { IC_Arrow, IC_Back } from '../../assets/icons'
 import { CUSTOM_COLOR } from '../../constants/colors'
@@ -17,12 +17,16 @@ import scale from '../../constants/responsive'
 import BigTextForm from '../../components/TextForm/BigTextForm'
 import LongButton from '../../components/Button/LongButton'
 import SocialButton from '../../components/Button/SocialButton'
-import isValidEmail from './apis/isValidEmail'
-import isValidName from './apis/isValidName'
-import isValidPassword from './apis/isValidPassword'
+import isValidEmail from './functions/isValidEmail'
+import isValidName from './functions/isValidName'
+import isValidPassword from './functions/isValidPassword'
 import useKeyboard from '../../hooks/useKeyboard'
+import userApi from '../../apis/userApi'
+import { useDispatch } from 'react-redux'
+import { userAction } from '../../redux/slice/userSlice'
 
 const SignupScreen = (props) => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,6 +37,13 @@ const SignupScreen = (props) => {
     }
     return false;
   };
+
+  const handleSignup = async () => {
+    await userApi.emailRegister(email, password, name);
+    dispatch(userAction.update({
+      name: name,
+    }))
+  }
 
   return (
       <ScrollView
@@ -70,14 +81,15 @@ const SignupScreen = (props) => {
           <Text style={[textStyles.desItem, styles.signInText]}>
             Already have an account?
           </Text>
-          <IC_Arrow />
+          <IC_Arrow/>
         </TouchableOpacity>
 
         {/* sign up */}
         <LongButton
           content='SIGN UP'
           isActive={activeHanle()}
-          style={styles.signUpButton} />
+          style={styles.signUpButton} 
+          onPress={handleSignup}/>
       </ScrollView>
   )
 }

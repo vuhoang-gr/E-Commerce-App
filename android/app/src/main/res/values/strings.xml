@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">eCommerce_app</string>
+    <string name="facebook_app_id">3274893126102509</string>
+    <string name="facebook_client_token">a31f458cf564bb715d2d231f68fc52c8</string>
 </resources>
