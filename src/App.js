@@ -1,13 +1,14 @@
-import { StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 import Display from './temp/Display'
-import AuthProvider from './routes/AuthProvider'
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Display />
-    </AuthProvider>
+    <Provider store={store}>
+        <Display />
+    </Provider>
   )
 }
 

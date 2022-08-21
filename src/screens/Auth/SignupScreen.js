@@ -17,14 +17,16 @@ import scale from '../../constants/responsive'
 import BigTextForm from '../../components/TextForm/BigTextForm'
 import LongButton from '../../components/Button/LongButton'
 import SocialButton from '../../components/Button/SocialButton'
-import isValidEmail from './apis/isValidEmail'
-import isValidName from './apis/isValidName'
-import isValidPassword from './apis/isValidPassword'
+import isValidEmail from './functions/isValidEmail'
+import isValidName from './functions/isValidName'
+import isValidPassword from './functions/isValidPassword'
 import useKeyboard from '../../hooks/useKeyboard'
-import { AuthContext } from '../../routes/AuthProvider'
+import userApi from '../../apis/userApi'
+import { useDispatch } from 'react-redux'
+import { userAction } from '../../redux/slice/userSlice'
 
 const SignupScreen = (props) => {
-  const {register} = useContext(AuthContext);
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,6 +37,13 @@ const SignupScreen = (props) => {
     }
     return false;
   };
+
+  const handleSignup = async () => {
+    await userApi.emailRegister(email, password, name);
+    dispatch(userAction.update({
+      name: name,
+    }))
+  }
 
   return (
       <ScrollView
@@ -80,7 +89,7 @@ const SignupScreen = (props) => {
           content='SIGN UP'
           isActive={activeHanle()}
           style={styles.signUpButton} 
-          onPress={() => register(email, password)}/>
+          onPress={handleSignup}/>
       </ScrollView>
   )
 }
