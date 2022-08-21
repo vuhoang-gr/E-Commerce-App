@@ -41,6 +41,7 @@ const LoginScreen = (props) => {
     }
 
     const onForgot = () => {
+        props.setState();
         navigation.navigate(SCREENS.FORGOT_PASSWORD);
     }
 

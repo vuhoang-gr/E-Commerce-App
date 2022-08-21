@@ -1,4 +1,5 @@
 import {
+    BackHandler,
     KeyboardAvoidingView,
     SafeAreaView,
     ScrollView,
@@ -7,7 +8,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BackHeader from '../../components/BackHeader'
 import { IC_Arrow, IC_Back } from '../../assets/icons'
 import { CUSTOM_COLOR } from '../../constants/colors'
@@ -27,8 +28,22 @@ import SCREENS from '../../constants/screens'
 
 const AuthScreen = (props) => {
     const [status, setStatus] = useState('Sign up');
-
+    const [backFromOther, setBackFromOther] = useState(false);
     const keyboardIsShown = useKeyboard();
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+            if (status !== 'Sign up') {
+                if(backFromOther){
+                    setBackFromOther(false);
+                    return false;
+                }
+                setStatus('Sign up');
+                return true;
+            }
+        })
+        return backHandler.remove;
+    }, [status, backFromOther])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -37,7 +52,7 @@ const AuthScreen = (props) => {
                 options={{
                     headerBackground: CUSTOM_COLOR.background,
                     backAction: status === 'Login' ? () => setStatus('Sign up') : null,
-                    hideLeftComponent: status=== 'Sign up' ? true : false
+                    hideLeftComponent: status === 'Sign up' ? true : false
 
                 }} />
             <Text style={[textStyles.h1, styles.header]}>
@@ -46,7 +61,7 @@ const AuthScreen = (props) => {
 
             {/* body */}
             {status === 'Login'
-                ? <LoginScreen navigation={props.navigation} />
+                ? <LoginScreen navigation={props.navigation} setState={()=>setBackFromOther(true)}/>
                 : <SignupScreen onSignIn={() => setStatus('Login')} />}
 
             {/* footer */}
