@@ -1,6 +1,6 @@
 //import liraries
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {IC_Star, IC_Yellow_Star} from '../../assets/icons';
 import {CUSTOM_COLOR} from '../../constants/colors';
 import scale from '../../constants/responsive';
@@ -16,6 +16,7 @@ const ProductCardListCatalog = props => {
     numberOfRate,
     cost,
     rightComponent,
+    onPress,
   } = props;
   const listStart = [];
   const listYellowStar = rate => {
@@ -25,7 +26,10 @@ const ProductCardListCatalog = props => {
   };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      onPress={onPress}>
       <View style={styles.imageContainer}>
         <Image source={img} />
       </View>
@@ -65,7 +69,7 @@ const ProductCardListCatalog = props => {
         </Text>
         <View style={styles.rightComponentContainer}>{rightComponent}</View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
