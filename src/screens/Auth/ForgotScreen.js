@@ -1,4 +1,5 @@
 import {
+    Keyboard,
     KeyboardAvoidingView,
     SafeAreaView,
     ScrollView,
@@ -17,15 +18,27 @@ import scale from '../../constants/responsive'
 import BigTextForm from '../../components/TextForm/BigTextForm'
 import LongButton from '../../components/Button/LongButton'
 import SocialButton from '../../components/Button/SocialButton'
-import isValidEmail from './apis/isValidEmail'
-import isValidName from './apis/isValidName'
-import isValidPassword from './apis/isValidPassword'
+import isValidEmail from './functions/isValidEmail'
+import isValidName from './functions/isValidName'
+import isValidPassword from './functions/isValidPassword'
 import useKeyboard from '../../hooks/useKeyboard'
 import LoginScreen from './LoginScreen'
 import SignupScreen from './SignupScreen'
+import userApi from '../../apis/userApi'
+import SentAlert from './SentAlert'
 
 const ForgotScreen = (props) => {
     const [email, setEmail] = useState('');
+    const [sent, setSended] = useState(false);
+    const keyboardIsShown = useKeyboard();
+    const sendEmailHandle = () => {
+        userApi.sendPwReset(email);
+        if(keyboardIsShown) {
+            Keyboard.dismiss();
+        }
+        setSended(true);
+        console.log('sended');
+    }
     return (
         <SafeAreaView style={styles.container}>
             {/* header */}
@@ -54,9 +67,10 @@ const ForgotScreen = (props) => {
                 <LongButton
                     content='SEND'
                     isActive={isValidEmail(email)}
+                    onPress={sendEmailHandle}
                 />
             </View>
-
+            {sent? <SentAlert navigation={props.navigation}/> : null}
 
         </SafeAreaView>
     )

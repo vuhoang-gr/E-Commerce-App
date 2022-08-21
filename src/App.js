@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 import Display from './temp/Display'
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 
 const App = () => {
   return (
-    <Display/>
+    <Provider store={store}>
+        <Display />
+    </Provider>
   )
 }
 
