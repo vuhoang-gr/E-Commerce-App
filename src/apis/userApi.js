@@ -1,7 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth'
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
-import {upade} from '@react-native-firebase/auth'
 
 const userApi = {
     emailLogin: async (email, password) => {
@@ -58,6 +58,8 @@ const userApi = {
     signOut: async () => {
         await auth().signOut()
             .catch(e => console.log(e))
+        await AsyncStorage.removeItem('ACCESS_TOKEN')
+        .catch(e => console.log('remove token storage err', e));
     },
     sendPwReset: async (email) => {
         await auth().sendPasswordResetEmail(email)
