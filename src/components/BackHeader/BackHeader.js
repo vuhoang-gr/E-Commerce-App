@@ -72,7 +72,7 @@ const BackHeader = props => {
 
   return (
     <View style={containerStyle}>
-      {options.hideLeftComponent ? <View />
+      {options.hideLeftComponent && !searching ? <View />
         :
         <TouchableOpacity
           activeOpacity={0.7}
