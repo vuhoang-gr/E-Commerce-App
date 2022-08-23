@@ -63,7 +63,7 @@ const BackHeader = props => {
     }
     else {
       options.backAction
-        ? options.backAction
+        ? options.backAction()
         : leftRouteName
           ? navigation.navigate(leftRouteName)
           : navigation.goBack()
