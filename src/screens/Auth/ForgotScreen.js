@@ -9,7 +9,7 @@ import {
     View
 } from 'react-native'
 import React, { useState } from 'react'
-import BackHeader from '../../components/BackHeader'
+import BackHeader from '../../components/BackHeader/BackHeader'
 import { IC_Arrow, IC_Back } from '../../assets/icons'
 import { CUSTOM_COLOR } from '../../constants/colors'
 import { PADDING_HORIZONTAL } from '../../constants/size'
