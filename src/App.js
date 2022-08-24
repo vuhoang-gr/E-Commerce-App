@@ -1,10 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
-import Display from './temp/Display'
+// import Display from './temp/Display'
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
+import RootNavigator from './routes/RootNavigator'
 
 const App = () => {
   return (
-    <Display/>
+    <Provider store={store}>
+        <RootNavigator />
+    </Provider>
   )
 }
 
