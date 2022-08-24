@@ -1,7 +1,7 @@
 const sfProText = 'SFProText-';
 const metropolis = 'Metropolis-';
 
-const FONTS= {
+const FONTS = {
   SFProText: {
     Regular: sfProText + 'Regular',
     Semibold: sfProText + 'Semibold',
@@ -12,7 +12,7 @@ const FONTS= {
     Medium: metropolis + 'Medium',
     Regular: metropolis + 'Regular',
     Semibold: metropolis + 'Semibold',
-  }
+  },
 };
 
 export default FONTS;
