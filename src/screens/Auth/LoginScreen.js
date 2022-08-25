@@ -25,7 +25,10 @@ import SCREENS from '../../constants/screens'
 import userApi from '../../apis/userApi'
 
 const LoginScreen = (props) => {
-    const {navigation} = props;
+    const {
+        navigation,
+        setFail,
+    } = props;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -36,8 +39,10 @@ const LoginScreen = (props) => {
         return false;
     };
 
-    const loginHandle = () => {
-        userApi.emailLogin(email, password);
+    const loginHandle = async () => {
+        const response = await userApi.emailLogin(email, password);
+        if(!response)
+            setFail(true);
     }
 
     const onForgot = () => {

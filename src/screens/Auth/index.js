@@ -25,16 +25,18 @@ import useKeyboard from '../../hooks/useKeyboard'
 import LoginScreen from './LoginScreen'
 import SignupScreen from './SignupScreen'
 import SCREENS from '../../constants/screens'
+import CustomAlert from '../../components/Alert/CustomAlert'
 
 const AuthScreen = (props) => {
     const [status, setStatus] = useState('Sign up');
     const [backFromOther, setBackFromOther] = useState(false);
     const keyboardIsShown = useKeyboard();
+    const [alert, setAlert] = useState(false);
 
     useEffect(() => {
         const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
             if (status !== 'Sign up') {
-                if(backFromOther){
+                if (backFromOther) {
                     setBackFromOther(false);
                     return false;
                 }
@@ -61,7 +63,10 @@ const AuthScreen = (props) => {
 
             {/* body */}
             {status === 'Login'
-                ? <LoginScreen navigation={props.navigation} setState={()=>setBackFromOther(true)}/>
+                ? <LoginScreen
+                    navigation={props.navigation}
+                    setState={() => setBackFromOther(true)}
+                    setFail={(bool) => setAlert(bool)} />
                 : <SignupScreen onSignIn={() => setStatus('Login')} />}
 
             {/* footer */}
@@ -75,6 +80,12 @@ const AuthScreen = (props) => {
                         <SocialButton type='fb' />
                     </View>
                 </View> : null}
+            {alert &&
+                <CustomAlert
+                    title='Email or password is wrong'
+                    content='Please check your email and password and try again'
+                    buttonTitle='OK'
+                    onSubmit={() => setAlert(false)} />}
         </SafeAreaView>
     )
 }

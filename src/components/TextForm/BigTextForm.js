@@ -5,7 +5,7 @@ import {
     TextInput,
     View
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import scale from '../../constants/responsive'
 import { CUSTOM_COLOR } from '../../constants/colors'
 import { Shadow } from '../../constants/customStyles'
@@ -14,10 +14,21 @@ import { IC_Check, IC_X } from '../../assets/icons'
 
 const BigTextForm = (props) => {
     const [text, setText] = useState('');
-    const { Condition } = props;
-
+    const { 
+        Condition,
+        label = 'Your Label',
+        defaultText = null,
+        editable = true,
+        shadow = true,
+        secure = false,
+        errorMsg='Your error message'
+    } = props;
+    useEffect(() => {
+        if(defaultText)
+            setText(defaultText);
+    },[])
     const textCondition = (txt) => {
-        if(!Condition){return true;}
+        if(!Condition){return undefined;}
         if(text.length > 0)
             return Condition(txt);
         return true;
@@ -30,12 +41,12 @@ const BigTextForm = (props) => {
     }
     const containerStyle = [
         styles.container,
-        props.shadow ? Shadow : {},
-        textCondition(text)
-            ? {} : styles.wrong
+        shadow ? Shadow : {},
+        textCondition(text) === false
+            ? styles.wrong : {}
     ];
     const wrapStyle = [
-        !textCondition(text) ? styles.wrap : {},
+        textCondition(text) === false ? styles.wrap : {},
         props.style,
     ];
     return (
@@ -46,23 +57,31 @@ const BigTextForm = (props) => {
                         <Text style={[
                             textStyles.helper, 
                             styles.label,
-                            !textCondition(text) && {color:CUSTOM_COLOR.error}]}>
-                            {props.label}
+                            textCondition(text) === false && {color:CUSTOM_COLOR.error}]}>
+                            {label}
                         </Text> : null}
                     <TextInput
                         onChangeText={(txt) => handleChange(txt)}
                         style={[textStyles.desItem, text.length > 0 && styles.typing]}
-                        placeholder={props.label}
-                        secureTextEntry={props.secure ? true : false} />
+                        placeholder={label}
+                        secureTextEntry={secure ? true : false}
+                        editable={editable}
+                        >
+                            {defaultText}
+                        </TextInput>
                 </View>
                 {textCondition(text)
                     ? text.length > 0 && <IC_Check style={styles.rightCheck} /> 
-                    : <IC_X style={styles.rightCheck} />}
+                    : textCondition(text) === false
+                    ? <IC_X style={styles.rightCheck} />
+                    : null}
             </View>
             {textCondition(text)
-                    ? null : 
+            ? null 
+            : textCondition(text) === undefined
+            ? null :
                     <Text style={[textStyles.helper, styles.error]}>
-                        {props.errorMsg}
+                        {errorMsg}
                     </Text>}
         </View>
     )

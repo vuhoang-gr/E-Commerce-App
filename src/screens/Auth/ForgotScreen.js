@@ -1,4 +1,5 @@
 import {
+    Alert,
     Keyboard,
     KeyboardAvoidingView,
     SafeAreaView,
@@ -25,19 +26,22 @@ import useKeyboard from '../../hooks/useKeyboard'
 import LoginScreen from './LoginScreen'
 import SignupScreen from './SignupScreen'
 import userApi from '../../apis/userApi'
-import SentAlert from './SentAlert'
+import CustomAlert from '../../components/Alert/CustomAlert'
 
 const ForgotScreen = (props) => {
     const [email, setEmail] = useState('');
-    const [sent, setSended] = useState(false);
+    const [sent, setSent] = useState(false);
+    const [isFail, setIsFail] = useState(false);
     const keyboardIsShown = useKeyboard();
-    const sendEmailHandle = () => {
-        userApi.sendPwReset(email);
+    const sendEmailHandle = async () => {
+        const response = await userApi.sendPwReset(email);
         if(keyboardIsShown) {
             Keyboard.dismiss();
         }
-        setSended(true);
-        console.log('sended');
+        setSent(true);
+        if(!response)
+            setIsFail(true);
+        console.log('sent');
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -70,7 +74,13 @@ const ForgotScreen = (props) => {
                     onPress={sendEmailHandle}
                 />
             </View>
-            {sent? <SentAlert navigation={props.navigation}/> : null}
+            {sent
+            ? <CustomAlert 
+            title={!isFail ? 'Email has been sent' : 'Email not found'}
+            content={`Please check your email and ${isFail ? 'request' : 'login'} again!`}
+            buttonTitle={isFail ? 'OK' : 'Back to Login'}
+            onSubmit={isFail ? () => {setSent(false);setIsFail(false)} : () => props.navigation.goBack()}/> 
+            : null}
 
         </SafeAreaView>
     )

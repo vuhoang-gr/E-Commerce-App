@@ -4,27 +4,37 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import scale from '../../constants/responsive'
 import { CUSTOM_COLOR } from '../../constants/colors'
 import textStyles from '../../constants/textStyles'
-import LongButton from '../../components/Button/LongButton'
+import LongButton from '../Button/LongButton'
+import { PADDING_HORIZONTAL } from '../../constants/size'
 
-const SentAlert = (props) => {
+const CustomAlert = (props) => {
+    const {
+        title = 'Your title',
+        content = 'Yourt content',
+        buttonTitle = 'Button title',
+        onSubmit = () => {},
+    } = props
   return (
     <SafeAreaView style={styles.container}>
         <View style={[styles.container, styles.placeHolder]}/>
         <View opacity={1} style={styles.alertContainer} >
-            <Text style={[textStyles.h3, styles.alertText]}>
-                {`Email has been sent, please check your mail`}
+            <Text style={[textStyles.h3, {
+                alignSelf: 'center'
+            }]}>
+                {title}
+            </Text>
+            <Text style={[textStyles.desText, styles.alertText]}>
+                {content}
             </Text>
             <LongButton 
-            content='Back to login'
-            onPress={() => {
-                props.navigation.goBack();
-            }}/>
+            content={buttonTitle}
+            onPress={onSubmit}/>
         </View>
     </SafeAreaView>
   )
 }
 
-export default SentAlert
+export default CustomAlert
 
 const styles = StyleSheet.create({
     placeHolder: {
@@ -41,14 +51,16 @@ const styles = StyleSheet.create({
     alertContainer: {
         backgroundColor: CUSTOM_COLOR.background,
         width: '80%',
-        height: '25%',
+        // height: '25%',
         opacity: 1,
-        borderRadius: scale.scaleWidth(40),
+        borderRadius: scale.scaleWidth(15),
         justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: scale.scaleWidth(30)
+        // alignItems: 'center',
+        padding: PADDING_HORIZONTAL
     },
     alertText: {
-        // textAlign: 'center'
+        marginLeft: scale.scaleWidth(9),
+        marginVertical: scale.scaleHeight(15),
+        lineHeight: scale.scaleHeight(19)
     }
 })
