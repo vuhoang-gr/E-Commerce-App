@@ -1,13 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Display from './temp/Display'
-
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import BottomTab from './navigation/BottomTab';
 const App = () => {
-  return (
-    <Display/>
-  )
-}
+  return <BottomTab></BottomTab>;
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

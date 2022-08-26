@@ -5,6 +5,8 @@ export {default as IC_Arrow} from './ic_arrow.svg';
 export {default as IC_Pen} from './ic_pen.svg';
 export {default as IC_Google} from './ic_google.svg';
 export {default as IC_Facebook} from './ic_facebook.svg';
-
-
-
+export {default as IC_Shop} from './ic_Shop.svg';
+export {default as IC_Home} from './ic_Home.svg';
+export {default as IC_Bag} from './ic_Bag.svg';
+export {default as IC_Profile} from './ic_Profile.svg';
+export {default as IC_Heart} from './ic_Heart.svg';
