@@ -20,13 +20,13 @@ import {
 import scale from '../constants/responsive';
 import textStyles from '../constants/textStyles';
 import {CUSTOM_COLOR} from '../constants/colors';
+import {RadioButton} from 'react-native-paper';
 const Tab = createBottomTabNavigator();
 const BottomTab = () => {
-  const styteTabBarIcon = {
+  const styleTabBarIcon = {
     height: scale.scaleHeight(42),
     width: scale.scaleWidth(30),
-    justifyContent: 'center',
-    alignContent: 'center',
+    alignSelf: 'center',
   };
   return (
     <NavigationContainer>
@@ -54,12 +54,12 @@ const BottomTab = () => {
               return (
                 <View
                   style={{
-                    styteTabBarIcon,
+                    styleTabBarIcon,
                   }}>
                   <IC_Home
                     style={{width: 30, height: 30, borderColor: ColorIcon}}
                     fill={ColorIcon}></IC_Home>
-                  <Text style={[textStyles.iconTabBar, {color: ColorText}]}>
+                  <Text style={[textStyles.helper, {color: ColorText}]}>
                     Home
                   </Text>
                 </View>
@@ -76,7 +76,7 @@ const BottomTab = () => {
                 ? CUSTOM_COLOR.primary
                 : CUSTOM_COLOR.gray;
               return (
-                <View style={{styteTabBarIcon}}>
+                <View style={{styleTabBarIcon}}>
                   <IC_Shop
                     style={{
                       width: 30,
@@ -84,7 +84,7 @@ const BottomTab = () => {
                       borderColor: ColorIcon,
                     }}
                     fill={ColorIcon}></IC_Shop>
-                  <Text style={[textStyles.iconTabBar, {color: ColorText}]}>
+                  <Text style={[textStyles.helper, {color: ColorText}]}>
                     Shop
                   </Text>
                 </View>
@@ -101,11 +101,11 @@ const BottomTab = () => {
                 ? CUSTOM_COLOR.primary
                 : CUSTOM_COLOR.gray;
               return (
-                <View style={{styteTabBarIcon}}>
+                <View style={{styleTabBarIcon}}>
                   <IC_Bag
                     style={{width: 30, height: 30, borderColor: ColorIcon}}
                     fill={ColorIcon}></IC_Bag>
-                  <Text style={[textStyles.iconTabBar, {color: ColorText}]}>
+                  <Text style={[textStyles.helper, {color: ColorText}]}>
                     Bag
                   </Text>
                 </View>
@@ -123,11 +123,11 @@ const BottomTab = () => {
                 ? CUSTOM_COLOR.primary
                 : CUSTOM_COLOR.gray;
               return (
-                <View style={{styteTabBarIcon}}>
+                <View style={{styleTabBarIcon}}>
                   <IC_Heart
                     style={{width: 30, height: 30, borderColor: ColorIcon}}
                     fill={ColorIcon}></IC_Heart>
-                  <Text style={[textStyles.iconTabBar, {color: ColorText}]}>
+                  <Text style={[textStyles.helper, {color: ColorText}]}>
                     Favorite
                   </Text>
                 </View>
@@ -144,11 +144,11 @@ const BottomTab = () => {
                 ? CUSTOM_COLOR.primary
                 : CUSTOM_COLOR.gray;
               return (
-                <View style={{styteTabBarIcon}}>
+                <View style={{styleTabBarIcon}}>
                   <IC_Profile
                     style={{width: 30, height: 30, borderColor: ColorIcon}}
                     fill={ColorIcon}></IC_Profile>
-                  <Text style={[textStyles.iconTabBar, {color: ColorText}]}>
+                  <Text style={[textStyles.helper, {color: ColorText}]}>
                     Profile
                   </Text>
                 </View>

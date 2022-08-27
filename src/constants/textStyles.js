@@ -46,11 +46,6 @@ const textStyles = StyleSheet.create({
     fontSize: scale.scaleWidth(11),
     color: CUSTOM_COLOR.gray,
   },
-  iconTabBar: {
-    fontFamily: FONTS.Metropolis.Regular,
-    fontSize: scale.scaleWidth(11),
-    color: CUSTOM_COLOR.gray,
-  },
 });
 
 export default textStyles;

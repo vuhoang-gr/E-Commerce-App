@@ -1,19 +1,22 @@
 import React from 'react';
 import {View, StyleSheet, ImageBackground, Text} from 'react-native';
+
 import {IMG_card, IMG_cardVisa} from '../assets/images';
 import {CUSTOM_COLOR} from '../constants/colors';
 import scale from '../constants/responsive';
 import textStyles from '../constants/textStyles';
-import {useState} from 'react';
+
 //import CheckBox from 'react-native-check-box';
 const Card = props => {
-  const {data} = props;
+  const {data, isSelection} = props;
   const cardNumber = '* * * *  * * * *  * * * *  ' + (data.cardNumber % 10000);
-  const [isSelection, setSelection] = useState(false);
+
   if (!data.isVisa)
     return (
       <View style={styles.container}>
-        <ImageBackground source={IMG_card} style={styles.card}>
+        <ImageBackground
+          source={IMG_card}
+          style={[styles.card, {opacity: isSelection ? 1 : 0.8}]}>
           <Text style={[textStyles.h2, styles.cardNumber]}>{cardNumber}</Text>
           <View style={styles.text}>
             <View>
@@ -35,13 +38,15 @@ const Card = props => {
             </View>
           </View>
         </ImageBackground>
-        <View>{/* <CheckBox value={isSelection} /> */}</View>
+        <View></View>
       </View>
     );
   else {
     return (
       <View style={styles.container}>
-        <ImageBackground source={IMG_cardVisa} style={[styles.card]}>
+        <ImageBackground
+          source={IMG_cardVisa}
+          style={[styles.card, {opacity: isSelection ? 1 : 0.8}]}>
           <Text style={[textStyles.h2, styles.cardNumber]}>{cardNumber}</Text>
           <View style={styles.text}>
             <View>
@@ -75,7 +80,6 @@ const styles = StyleSheet.create({
   card: {
     width: scale.scaleWidth(343),
     height: scale.scaleHeight(216),
-    opacity: 0.2,
   },
   cardNumber: {
     letterSpacing: -0.41,
