@@ -1,13 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Display from './temp/Display'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import CatalogScreen from './screens/catalog';
+import HomeScreen from './screens/catalog/temp/HomeScreen';
 
 const App = () => {
-  return (
-    <Display/>
-  )
-}
+  return <CatalogScreen />;
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -13,3 +13,4 @@ export {default as IC_Find} from './ic_find.svg';
 export {default as IC_Star} from './ic_star.svg';
 export {default as IC_Yellow_Star} from './ic_yellow_star.svg';
 export {default as IC_Heart} from './ic_heart.svg';
+export {default as IC_Arrow_Dropdown} from './ic_arrow_dropdown.svg';

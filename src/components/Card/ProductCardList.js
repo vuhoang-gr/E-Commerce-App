@@ -1,23 +1,34 @@
 //import liraries
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import {IC_Star, IC_Yellow_Star, IC_X} from '../../assets/icons';
 import {CUSTOM_COLOR} from '../../constants/colors';
 import scale from '../../constants/responsive';
 import textStyles from '../../constants/textStyles';
+import FONTS from '../../constants/fonts';
+import LabelsComponent from '../../screens/catalog/temp/components/Labels';
 
 // create a component
 const ProductCardListCatalog = props => {
   const {
-    nameOfProduct,
-    img,
+    name,
+    images,
     color,
     size,
-    nameOfShop,
-    rate,
+    brand,
+    rating,
     numberOfRate,
     numOfProduct,
     cost,
+    soldout,
+    sale,
     rightComponent,
     onPress,
   } = props;
@@ -29,164 +40,273 @@ const ProductCardListCatalog = props => {
     return listStart;
   };
 
+  let tagType = '';
+  if (numberOfRate === 0 && !soldout) {
+    tagType = 'new';
+  }
+  if (sale !== 0 && !soldout) {
+    tagType = 'sale';
+  }
+
+  const opacity = !soldout ? 1 : 0.4;
+  const disable = !soldout ? false : true;
+  const newPrice = (cost * (100 - sale)) / 100;
+
   return (
-    <View style={styles.container1}>
-      <TouchableOpacity
-        style={styles.container}
-        activeOpacity={0.8}
-        onPress={onPress}>
-        <View style={styles.imageContainer}>
-          <Image source={img} />
-        </View>
-        <View style={{overflow: 'visible'}}>
-          {type === 'catalog' || type === 'order' ? (
-            <>
-              <Text
-                style={[
-                  textStyles.subHead,
-                  {
-                    marginLeft: scale.scaleWidth(10),
-                    marginTop: scale.scaleHeight(11),
-                  },
-                ]}>
-                {nameOfProduct}
-              </Text>
-              <Text
-                style={[
-                  textStyles.helper,
-                  {
-                    marginLeft: scale.scaleWidth(10),
-                  },
-                ]}>
-                {nameOfShop}
-              </Text>
-            </>
-          ) : type === 'favorites' ? (
-            <>
-              <Text
-                style={[
-                  textStyles.helper,
-                  {
-                    marginLeft: scale.scaleWidth(10),
-                    marginTop: scale.scaleHeight(11),
-                  },
-                ]}>
-                {nameOfShop}
-              </Text>
-              <Text
-                style={[
-                  textStyles.subHead,
-                  {
-                    marginLeft: scale.scaleWidth(10),
-                  },
-                ]}>
-                {nameOfProduct}
-              </Text>
-            </>
-          ) : null}
-          {type === 'catalog' ? (
-            <>
-              <View style={styles.rateContainer}>
-                {listYellowStar(rate)}
-                <Text style={textStyles.helper}>
-                  {'(' + numberOfRate + ')'}
-                </Text>
-              </View>
-              <Text
-                style={[
-                  textStyles.desItem,
-                  {
-                    marginLeft: scale.scaleWidth(10),
+    <>
+      <View style={styles.container1}>
+        <TouchableOpacity
+          style={styles.container}
+          activeOpacity={0.8}
+          disabled={disable}
+          onPress={onPress}>
+          <View style={styles.imageContainer}>
+            <ImageBackground
+              opacity={opacity}
+              key={(type, sale)}
+              source={images}
+              style={{
+                width: scale.scaleWidth(105),
+                height: scale.scaleHeight(104),
+              }}>
+              {tagType === '' ? null : (
+                <LabelsComponent
+                  tagType={tagType}
+                  sale={sale}
+                  style={{
+                    marginLeft: scale.scaleWidth(3),
                     marginTop: scale.scaleHeight(5),
-                  },
-                ]}>
-                {cost}
-              </Text>
-            </>
-          ) : type === 'order' || type === 'favorites' ? (
-            <>
-              <View style={styles.bottomContainer}>
-                <View style={styles.colorCostContainer}>
-                  <View style={styles.colorContainer}>
-                    <Text style={textStyles.helper}>{'Color: '}</Text>
+                  }}
+                />
+              )}
+              {/* <LabelsComponent tagType={tagType} sale={sale}></LabelsComponent> */}
+            </ImageBackground>
+          </View>
+          <View style={{overflow: 'visible', opacity: opacity}}>
+            {type === 'catalog' || type === 'order' ? (
+              <>
+                <Text
+                  style={[
+                    textStyles.subHead,
+                    {
+                      marginLeft: scale.scaleWidth(10),
+                      marginTop: scale.scaleHeight(11),
+                    },
+                  ]}>
+                  {name}
+                </Text>
+                <Text
+                  style={[
+                    textStyles.helper,
+                    {
+                      marginLeft: scale.scaleWidth(10),
+                    },
+                  ]}>
+                  {brand}
+                </Text>
+              </>
+            ) : type === 'favorites' ? (
+              <>
+                <Text
+                  style={[
+                    textStyles.helper,
+                    {
+                      marginLeft: scale.scaleWidth(10),
+                      marginTop: scale.scaleHeight(11),
+                    },
+                  ]}>
+                  {brand}
+                </Text>
+                <Text
+                  style={[
+                    textStyles.subHead,
+                    {
+                      marginLeft: scale.scaleWidth(10),
+                    },
+                  ]}>
+                  {name}
+                </Text>
+              </>
+            ) : null}
+            {type === 'catalog' ? (
+              <>
+                <View style={styles.rateContainer}>
+                  {listYellowStar(rating)}
+                  <Text style={textStyles.helper}>
+                    {'(' + numberOfRate + ')'}
+                  </Text>
+                </View>
+                {sale === 0 || soldout ? (
+                  <Text
+                    style={[
+                      textStyles.desItem,
+                      {
+                        marginLeft: scale.scaleWidth(10),
+                        marginTop: scale.scaleHeight(5),
+                      },
+                    ]}>
+                    {cost + '$'}
+                  </Text>
+                ) : (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginLeft: scale.scaleWidth(10),
+                      marginTop: scale.scaleHeight(5),
+                    }}>
                     <Text
-                      style={[
-                        textStyles.desText,
-                        {fontSize: scale.scaleWidth(11)},
-                      ]}>
-                      {color}
+                      style={{
+                        textDecorationLine: 'line-through',
+                        textDecorationStyle: 'solid',
+                        color: CUSTOM_COLOR.gray,
+                        fontFamily: FONTS.Metropolis.Regular,
+                      }}>
+                      {cost + '$'}
+                    </Text>
+                    <Text
+                      style={{
+                        color: CUSTOM_COLOR.primary,
+                        fontFamily: FONTS.Metropolis.Regular,
+                      }}>
+                      {' ' + newPrice + '$'}
                     </Text>
                   </View>
-                  {type === 'favorites' ? (
-                    <Text
-                      style={[
-                        textStyles.desItem,
-                        {marginTop: scale.scaleHeight(7)},
-                      ]}>
-                      {cost}
-                    </Text>
-                  ) : (
-                    <View style={styles.unitsContainer}>
-                      <Text style={textStyles.helper}>{'Units: '}</Text>
+                )}
+              </>
+            ) : type === 'order' || type === 'favorites' ? (
+              <>
+                <View style={styles.bottomContainer}>
+                  <View style={styles.colorCostContainer}>
+                    <View style={styles.colorContainer}>
+                      <Text style={textStyles.helper}>{'Color: '}</Text>
                       <Text
                         style={[
                           textStyles.desText,
                           {fontSize: scale.scaleWidth(11)},
                         ]}>
-                        {numOfProduct}
+                        {color}
                       </Text>
                     </View>
-                  )}
-                </View>
-                <View style={styles.colorCostContainer}>
-                  <View style={styles.colorContainer}>
-                    <Text
-                      style={[
-                        textStyles.helper,
-                        {marginLeft: scale.scaleWidth(40)},
-                      ]}>
-                      {'Size: '}
-                    </Text>
-                    <Text
-                      style={[
-                        textStyles.desText,
-                        {fontSize: scale.scaleWidth(11)},
-                      ]}>
-                      {size}
-                    </Text>
+                    {type === 'favorites' ? (
+                      // <Text
+                      //   style={[
+                      //     textStyles.desItem,
+                      //     {marginTop: scale.scaleHeight(7)},
+                      //   ]}>
+                      //   {cost}
+                      // </Text>
+                      <>
+                        {sale === 0 || soldout ? (
+                          <Text
+                            style={[
+                              textStyles.desItem,
+                              {marginTop: scale.scaleHeight(7)},
+                            ]}>
+                            {cost + '$'}
+                          </Text>
+                        ) : (
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              marginTop: scale.scaleHeight(7),
+                            }}>
+                            <Text
+                              style={{
+                                textDecorationLine: 'line-through',
+                                textDecorationStyle: 'solid',
+                                color: CUSTOM_COLOR.gray,
+                                fontFamily: FONTS.Metropolis.Regular,
+                              }}>
+                              {cost + '$'}
+                            </Text>
+                            <Text
+                              style={{
+                                color: CUSTOM_COLOR.primary,
+                                fontFamily: FONTS.Metropolis.Regular,
+                              }}>
+                              {' ' + newPrice + '$'}
+                            </Text>
+                          </View>
+                        )}
+                      </>
+                    ) : (
+                      <View style={styles.unitsContainer}>
+                        <Text style={textStyles.helper}>{'Units: '}</Text>
+                        <Text
+                          style={[
+                            textStyles.desText,
+                            {fontSize: scale.scaleWidth(11)},
+                          ]}>
+                          {numOfProduct}
+                        </Text>
+                      </View>
+                    )}
                   </View>
-                  {type === 'favorites' ? (
-                    <View style={styles.rateContainer1}>
-                      {listYellowStar(rate)}
-                      <Text style={textStyles.helper}>
-                        {'(' + numberOfRate + ')'}
+                  <View style={styles.colorCostContainer}>
+                    <View style={styles.colorContainer}>
+                      <Text
+                        style={[
+                          textStyles.helper,
+                          {marginLeft: scale.scaleWidth(40)},
+                        ]}>
+                        {'Size: '}
+                      </Text>
+                      <Text
+                        style={[
+                          textStyles.desText,
+                          {fontSize: scale.scaleWidth(11)},
+                        ]}>
+                        {size}
                       </Text>
                     </View>
-                  ) : null}
+                    {type === 'favorites' ? (
+                      <View style={styles.rateContainer1}>
+                        {listYellowStar(rating)}
+                        <Text style={textStyles.helper}>
+                          {'(' + numberOfRate + ')'}
+                        </Text>
+                      </View>
+                    ) : null}
+                  </View>
                 </View>
-              </View>
-            </>
-          ) : null}
-        </View>
-      </TouchableOpacity>
-      <View style={styles.rightContainer}>
-        {type !== 'order' ? (
-          <View style={styles.rightContainer}>
-            {type === 'favorites' ? (
-              <TouchableOpacity style={styles.iconX}>
-                <IC_X />
-              </TouchableOpacity>
+              </>
             ) : null}
-            <View style={styles.rightComponentContainer}>{rightComponent}</View>
           </View>
-        ) : (
-          <Text
-            style={[textStyles.desItem, {marginTop: scale.scaleHeight(60)}]}>
-            {cost}
-          </Text>
-        )}
+        </TouchableOpacity>
+        <View style={styles.rightContainer}>
+          {type !== 'order' ? (
+            <View style={styles.rightContainer}>
+              {type === 'favorites' ? (
+                <TouchableOpacity style={styles.iconX}>
+                  <IC_X />
+                </TouchableOpacity>
+              ) : null}
+              {type === 'catalog' && soldout ? null : (
+                <View style={styles.rightComponentContainer}>
+                  {rightComponent}
+                </View>
+              )}
+            </View>
+          ) : (
+            <Text
+              style={[textStyles.desItem, {marginTop: scale.scaleHeight(60)}]}>
+              {cost + '$'}
+            </Text>
+          )}
+        </View>
       </View>
-    </View>
+      {soldout ? (
+        <View style={{width: '100%', opacity: opacity}}>
+          <Text
+            style={[
+              textStyles.desText,
+              {opacity: 1, color: CUSTOM_COLOR.black, fontSize: 14},
+            ]}>
+            {'Sorry, this item is currently sold out'}
+          </Text>
+        </View>
+      ) : null}
+    </>
   );
 };
 
@@ -196,8 +316,8 @@ const styles = StyleSheet.create({
     height: scale.scaleHeight(104),
     width: scale.scaleWidth(343),
     backgroundColor: CUSTOM_COLOR.white,
-    elevation: scale.scaleWidth(5),
-    shadowColor: CUSTOM_COLOR.black,
+    // elevation: scale.scaleWidth(5),
+    // shadowColor: CUSTOM_COLOR.black,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: scale.scaleHeight(10),

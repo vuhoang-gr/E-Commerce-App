@@ -6,7 +6,7 @@ const COLORS = {
   white: '#fff',
   scarlet: '#F01F0E',
   eucalyptus: '#2AA952',
-}
+};
 
 export const CUSTOM_COLOR = {
   black: COLORS.mineShaft,
@@ -16,4 +16,4 @@ export const CUSTOM_COLOR = {
   white: COLORS.white,
   error: COLORS.scarlet,
   success: COLORS.eucalyptus,
-}
+};
