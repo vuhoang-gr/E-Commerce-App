@@ -8,12 +8,17 @@ import MyBag from '../screens/MyBag';
 import MyFavorite from '../screens/MyFavorite';
 import MyProfile from '../screens/MyProfile';
 import Categories from '../screens/Categories';
-import {IC_Bag, IC_Heart, IC_Home, IC_Profile, IC_Shop} from '../assets/icons';
+import {
+  IC_Bag,
+  IC_Favorite,
+  IC_Home,
+  IC_Profile,
+  IC_Shop,
+} from '../assets/icons';
 import scale from '../constants/responsive';
 import textStyles from '../constants/textStyles';
 import {CUSTOM_COLOR} from '../constants/colors';
 import HomeScreen from '../screens/HomeScreen';
-
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -119,9 +124,9 @@ const TabNavigator = () => {
                   {styleTabBarIcon},
                   {justifyContent: 'center', alignItems: 'center'},
                 ]}>
-                <IC_Heart
+                <IC_Favorite
                   style={{width: 30, height: 30, borderColor: ColorIcon}}
-                  fill={ColorIcon}></IC_Heart>
+                  fill={ColorIcon}></IC_Favorite>
                 <Text style={[textStyles.helper, {color: ColorText}]}>
                   Favorite
                 </Text>

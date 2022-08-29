@@ -9,4 +9,5 @@ export {default as IC_Shop} from './ic_Shop.svg';
 export {default as IC_Home} from './ic_Home.svg';
 export {default as IC_Bag} from './ic_Bag.svg';
 export {default as IC_Profile} from './ic_Profile.svg';
-export {default as IC_Heart} from './ic_Favorite.svg';
+export {default as IC_Favorite} from './ic_Favorite.svg';
+export {default as IC_Heart} from './ic_heart';
