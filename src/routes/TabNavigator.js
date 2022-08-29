@@ -8,14 +8,7 @@ import MyBag from '../screens/MyBag';
 import MyFavorite from '../screens/MyFavorite';
 import MyProfile from '../screens/MyProfile';
 import Categories from '../screens/Categories';
-import {
-  IC_Back,
-  IC_Bag,
-  IC_Heart,
-  IC_Home,
-  IC_Profile,
-  IC_Shop,
-} from '../assets/icons';
+import {IC_Bag, IC_Heart, IC_Home, IC_Profile, IC_Shop} from '../assets/icons';
 import scale from '../constants/responsive';
 import textStyles from '../constants/textStyles';
 import {CUSTOM_COLOR} from '../constants/colors';
@@ -123,7 +116,11 @@ const TabNavigator = () => {
                 ? CUSTOM_COLOR.primary
                 : CUSTOM_COLOR.gray;
               return (
-                <View style={{styleTabBarIcon}}>
+                <View
+                  style={[
+                    {styleTabBarIcon},
+                    {justifyContent: 'center', alignItems: 'center'},
+                  ]}>
                   <IC_Heart
                     style={{width: 30, height: 30, borderColor: ColorIcon}}
                     fill={ColorIcon}></IC_Heart>

@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import BottomTab from './TabNavigation/BottomTab';
-import PaymentCard from './screens/payment/paymentCard';
+import SuccessScreen from './screens/payment/successScreen';
+import PaymentNavigator from './routes/PaymentNavigator';
+import {RootNavigator} from './routes/RootNavigator';
 import TabNavigator from './routes/TabNavigator';
 const App = () => {
-  return <PaymentCard></PaymentCard>;
+  return <TabNavigator></TabNavigator>;
 };
 
 export default App;

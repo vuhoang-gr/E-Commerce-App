@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text, ScrollView, Button} from 'react-native';
 import SCREENS from '../../constants/screens';
-import {RadioButton} from 'react-native-paper';
-import BackHeader from '../../components/BackHeader';
+
+import BackHeader from '../../components/BackHeader/BackHeader';
 import {CUSTOM_COLOR} from '../../constants/colors';
 import textStyles from '../../constants/textStyles';
 import scale from '../../constants/responsive';
-import Card from '../../components/Card';
+import CardATM from './Components/CardATM';
 import {useState} from 'react';
 import CheckBox from '@react-native-community/checkbox';
 const info = {
@@ -37,13 +37,14 @@ const info3 = {
 
 const data = [info, info2, info3];
 
-const PaymentCard = props => {
+const PaymentEdit = props => {
   const [checked, setChecked] = React.useState(data[0].key);
   return (
     <View style={styles.container}>
       <BackHeader
-        options={{leftRouteName: SCREENS.BAG}}
-        title={'Payment Methods'}></BackHeader>
+        options={{leftRouteName: null}}
+        title={'Payment Methods'}
+        navigation={props.navigation}></BackHeader>
       <View style={styles.TextContainer}>
         <Text style={textStyles.subHead}>Your payment cards</Text>
       </View>
@@ -51,9 +52,9 @@ const PaymentCard = props => {
         {data.map(info => {
           return (
             <View key={info.key}>
-              <Card
+              <CardATM
                 data={info}
-                isSelection={info.key === checked ? true : false}></Card>
+                isSelection={info.key === checked ? true : false}></CardATM>
               <View
                 style={{
                   flexDirection: 'row',
@@ -87,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PaymentCard;
+export default PaymentEdit;

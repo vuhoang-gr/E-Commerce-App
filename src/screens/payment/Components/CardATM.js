@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, StyleSheet, ImageBackground, Text} from 'react-native';
 
-import {IMG_card, IMG_cardVisa} from '../assets/images';
-import {CUSTOM_COLOR} from '../constants/colors';
-import scale from '../constants/responsive';
-import textStyles from '../constants/textStyles';
+import {IMG_card, IMG_cardVisa} from '../../../assets/images/index';
+import {CUSTOM_COLOR} from '../../../constants/colors';
+import scale from '../../../constants/responsive';
+import textStyles from '../../../constants/textStyles';
 
 //import CheckBox from 'react-native-check-box';
-const Card = props => {
+const CardATM = props => {
   const {data, isSelection} = props;
   const cardNumber = '* * * *  * * * *  * * * *  ' + (data.cardNumber % 10000);
 
@@ -16,7 +16,7 @@ const Card = props => {
       <View style={styles.container}>
         <ImageBackground
           source={IMG_card}
-          style={[styles.card, {opacity: isSelection ? 1 : 0.8}]}>
+          style={[styles.card, {opacity: isSelection ? 1 : 0.5}]}>
           <Text style={[textStyles.h2, styles.cardNumber]}>{cardNumber}</Text>
           <View style={styles.text}>
             <View>
@@ -46,7 +46,7 @@ const Card = props => {
       <View style={styles.container}>
         <ImageBackground
           source={IMG_cardVisa}
-          style={[styles.card, {opacity: isSelection ? 1 : 0.8}]}>
+          style={[styles.card, {opacity: isSelection ? 1 : 0.5}]}>
           <Text style={[textStyles.h2, styles.cardNumber]}>{cardNumber}</Text>
           <View style={styles.text}>
             <View>
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default CardATM;
