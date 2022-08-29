@@ -11,7 +11,7 @@ const FONTS = {
     Bold: metropolis + 'Bold',
     Medium: metropolis + 'Medium',
     Regular: metropolis + 'Regular',
-    Semibold: metropolis + 'Semibold',
+    Semibold: metropolis + 'SemiBold',
   },
 };
 
