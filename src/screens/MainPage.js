@@ -15,6 +15,7 @@ import LongButton from '../components/Button/LongButton';
 import PRODUCT_CARD_MODULE from '../components/ProductCard/Module/ProductCardModule';
 import React from 'react';
 import {CUSTOM_COLOR} from '../constants/colors';
+import LinearGradient from 'react-native-linear-gradient';
 
 const TEST_DATA = [
   {
@@ -60,32 +61,36 @@ const MainPage = () => {
     <ScrollView nestedScrollEnabled={true} style={styles.container}>
       <View style={styles.PictureContainer}>
         <ImageBackground style={styles.Picture} source={IMG_MainPage}>
-          <View style={{flex: 5}} />
-          <View style={{flex: 1, marginLeft: scale.scaleWidth(17)}}>
-            <Text
-              style={{
-                fontFamily: FONTS.Metropolis.Black,
-                fontSize: scale.scaleWidth(48),
-                color: CUSTOM_COLOR.white,
-              }}>
-              {'Fashion'}
-            </Text>
-            <Text
-              style={{
-                marginTop: scale.scaleHeight(-20),
-                fontFamily: FONTS.Metropolis.Black,
-                fontSize: scale.scaleWidth(48),
-                color: CUSTOM_COLOR.white,
-              }}>
-              {'sale'}
-            </Text>
-          </View>
-          <View style={{flex: 1}} />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={{marginLeft: scale.scaleWidth(17), flex: 1}}>
-            <LongButton size={'small'} content={'Check'} />
-          </TouchableOpacity>
+          <LinearGradient
+            colors={['#00000000', '#000000']}
+            style={{height: '100%', width: '100%'}}>
+            <View style={{flex: 5}} />
+            <View style={{flex: 1, marginLeft: scale.scaleWidth(17)}}>
+              <Text
+                style={{
+                  fontFamily: FONTS.Metropolis.Black,
+                  fontSize: scale.scaleWidth(48),
+                  color: CUSTOM_COLOR.white,
+                }}>
+                {'Fashion'}
+              </Text>
+              <Text
+                style={{
+                  marginTop: scale.scaleHeight(-20),
+                  fontFamily: FONTS.Metropolis.Black,
+                  fontSize: scale.scaleWidth(48),
+                  color: CUSTOM_COLOR.white,
+                }}>
+                {'sale'}
+              </Text>
+            </View>
+            <View style={{flex: 1}} />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{marginLeft: scale.scaleWidth(17), flex: 1}}>
+              <LongButton size={'small'} content={'Check'} />
+            </TouchableOpacity>
+          </LinearGradient>
         </ImageBackground>
       </View>
       <View style={{height: scale.scaleHeight(10)}} />
@@ -112,7 +117,7 @@ const MainPage = () => {
             <PRODUCT_CARD_MODULE
               nameOfProduct={item.nameOfProduct}
               img_source={item.img_source}
-              nameOfShop={item.nameOfShop}
+              Brand={item.nameOfShop}
               rate={item.rate}
               numberOfRate={item.numberOfRate}
               cost={item.cost}
@@ -142,6 +147,7 @@ const styles = StyleSheet.create({
   Picture: {
     height: scale.scaleHeight(536),
     width: scale.scaleWidth(376),
+    backgroundColor: '#00000060',
   },
   newContainer: {
     height: scale.scaleHeight(80),

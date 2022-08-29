@@ -17,7 +17,7 @@ const PRODUCT_CARD_MODULE = props => {
   const {
     nameOfProduct,
     img_source,
-    nameOfShop,
+    Brand,
     rate,
     numberOfRate,
     cost,
@@ -118,7 +118,7 @@ const PRODUCT_CARD_MODULE = props => {
           style={{
             ...textStyles.helper,
           }}>
-          {nameOfShop}
+          {Brand}
         </Text>
         <Text
           style={{
