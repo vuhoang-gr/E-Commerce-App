@@ -1,17 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
-import SuccessScreen from './screens/payment/successScreen';
-import PaymentNavigator from './routes/PaymentNavigator';
-import {RootNavigator} from './routes/RootNavigator';
-import TabNavigator from './routes/TabNavigator';
+// import Display from './temp/Display'
+import {store} from './redux/store';
+import {Provider} from 'react-redux';
+import RootNavigator from './routes/RootNavigator';
+
 const App = () => {
-  return <TabNavigator></TabNavigator>;
+  return (
+    <Provider store={store}>
+      <RootNavigator />
+    </Provider>
+  );
 };
 
 export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});
